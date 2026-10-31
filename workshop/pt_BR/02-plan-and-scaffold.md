@@ -3,11 +3,17 @@
 
 ---
 
-Antes de escrever qualquer código, vamos usar o **Plan Mode** para pensar na arquitetura. Planejar primeiro ajuda a projetar sistemas melhores e dá ao Copilot o contexto necessário para gerar código de maior qualidade.
+Antes de escrever qualquer código, vamos usar os fluxos de planejamento do Copilot para pensar na arquitetura. Planejar primeiro ajuda a projetar sistemas melhores e dá ao Copilot o contexto necessário para gerar código de maior qualidade.
 
 ## Tarefa 1: Planeje a Arquitetura da API
 
-1. Mude para o modo **Plan** no Copilot Chat (clique no seletor de modo na parte inferior do painel do chat)
+<!-- track:vscode:start -->
+1. Mude para o modo **Plan** no Copilot Chat (clique no seletor de modo na parte inferior do painel do chat).
+<!-- track:vscode:end -->
+
+<!-- track:cli:start -->
+1. Entre no **plan mode** no Copilot CLI pressionando **Shift+Tab** até o modo mudar ou usando `/plan`.
+<!-- track:cli:end -->
 
 2. Insira este prompt:
 
@@ -18,19 +24,28 @@ Antes de escrever qualquer código, vamos usar o **Plan Mode** para pensar na ar
    including the route structure, error handling, and caching strategy.
    ```
 
-3. **Revise o plano** — é aqui que o Plan Mode brilha. Não aceite a primeira resposta sem pensar:
+3. **Revise o plano** — é aqui que o planejamento mostra seu valor. Não aceite a primeira resposta sem pensar:
    - Peça esclarecimentos sobre qualquer coisa que não esteja clara
    - Sugira mudanças se algo não parecer correto
    - Itere até estar satisfeito com a abordagem
 
-4. Quando estiver satisfeito com o plano, peça ao Copilot para implementá-lo — mude para o modo **Agent** e diga para ele prosseguir
+<!-- track:vscode:start -->
+4. Quando estiver satisfeito com o plano, peça ao Copilot para implementá-lo: mude para o modo **Agent** e peça para prosseguir.
+<!-- track:vscode:end -->
 
-5. **Resultado:** Agora você deve ter uma rota de API criada em:
+<!-- track:cli:start -->
+4. Quando estiver satisfeito com o plano, peça ao Copilot CLI para prosseguir com a implementação.
+5. Revise as alterações nos arquivos com `/diff` antes de aprová-las.
+<!-- track:cli:end -->
+
+6. **Resultado:** Agora você deve ter uma rota de API criada em:
    ```
    src/pages/api/contributions/[username].ts
    ```
 
 ## Tarefa 2: Teste a API
+
+> **⚠️ Não está vendo as alterações?** Se o servidor de desenvolvimento não detectar a nova rota, pare-o (`Ctrl+C`) e reinicie com `npm run dev`.
 
 1. Certifique-se de que o servidor de desenvolvimento está rodando e teste o endpoint:
 
@@ -44,30 +59,45 @@ Antes de escrever qualquer código, vamos usar o **Plan Mode** para pensar na ar
 
 ## Tarefa 3: Planeje a Página de Batalha
 
+<!-- track:vscode:start -->
 1. Continue no modo **Plan** e insira este prompt:
+<!-- track:vscode:end -->
+
+<!-- track:cli:start -->
+1. Continue no plan mode (ou execute `/plan`) e insira este prompt:
+<!-- track:cli:end -->
 
    ```
    Now I need the main page. Plan a battle page for "Mona Mayhem - GitHub
    Contribution Battle Arena" with: two username inputs (Player 1 and Player 2),
-   a battle button, and a results area. Use a dark theme with the Press Start 2P
-   retro gaming font from Google Fonts. Plan the HTML structure, basic styling,
+   a battle button, and a results area. Keep the UI simple — don't over-engineer
+   the layout or styling at this stage. Plan the HTML structure, basic styling,
    and how the battle interaction will work.
    ```
 
-2. **Revise e itere** no plano — faça perguntas, sugira mudanças, refine a abordagem
+2. **Revise e itere** no plano — faça perguntas, sugira mudanças e refine a abordagem.
 
-3. Quando estiver satisfeito, mude para o modo **Agent** e deixe o Copilot construir a página
+<!-- track:vscode:start -->
+3. Quando estiver satisfeito, mude para o modo **Agent** e deixe o Copilot construir a página.
+<!-- track:vscode:end -->
+
+<!-- track:cli:start -->
+3. Quando estiver satisfeito, peça ao Copilot CLI para implementar o plano aprovado.
+4. Use `/diff` para revisar a estrutura HTML e CSS gerada antes de aprová-la.
+<!-- track:cli:end -->
 
 ## Tarefa 4: Verifique o Scaffold
 
-1. Abra http://localhost:4321 no seu navegador
+> **⚠️ Não está vendo as alterações?** Se a página não estiver correta ou não tiver sido atualizada, pare o servidor de desenvolvimento (`Ctrl+C`), reinicie com `npm run dev` e atualize o navegador.
+
+1. Abra http://localhost:4321 no seu navegador.
 
 2. Você deve ver:
    - O título do jogo
    - Dois campos de entrada de nome de usuário (Player 1 e Player 2)
    - Um botão de batalha
 
-3. O botão ainda não vai funcionar — isso é esperado! Ainda não conectamos a lógica JavaScript. Isso vem a seguir.
+3. O botão ainda não vai funcionar — isso é esperado! Ainda não conectamos a lógica de interação. Isso vem a seguir.
 
 ---
 
@@ -75,6 +105,6 @@ Antes de escrever qualquer código, vamos usar o **Plan Mode** para pensar na ar
 
 Você aprendeu a:
 
-- **Usar o Plan Mode** para projetar a arquitetura antes de escrever código
-- **Iterar nos planos** — fazer perguntas e refinar antes de implementar
-- **Alternar entre Plan e Agent Mode** para ir do design à implementação
+- **Planejar antes de programar** em vez de começar diretamente pela implementação
+- **Iterar nos planos** até definir bem a arquitetura
+- **Passar do plano à implementação** com um fluxo mais claro e seguro

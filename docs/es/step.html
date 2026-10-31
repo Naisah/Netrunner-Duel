@@ -11,7 +11,7 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mona Mayhem Workshop</title>
+    <title>Taller de Mona Mayhem</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -29,10 +29,10 @@
         <div class="header-content">
             <a href="index.html" class="header-brand">
                 <span class="header-icon">🎮</span>
-                <span class="header-title">Mona Mayhem Workshop</span>
+                <span class="header-title">Taller de Mona Mayhem</span>
             </a>
             <div class="header-nav">
-                <div class="track-toggle" role="tablist" aria-label="Workshop track toggle">
+                <div class="track-toggle" role="tablist" aria-label="Alternar itinerario del taller">
                     <button class="track-btn active" data-track="vscode" type="button">VS Code</button>
                     <button class="track-btn" data-track="cli" type="button">CLI</button>
                 </div>
@@ -56,7 +56,7 @@
     <div class="layout">
         <aside class="sidebar">
             <div class="sidebar-section">
-                <div class="sidebar-title">Etapas del Taller</div>
+                <div class="sidebar-title">Etapas del taller</div>
                 <nav id="stepNav"></nav>
             </div>
         </aside>
@@ -85,13 +85,13 @@
         };
 
         const steps = [
-            { id: '00-overview', file: '00-overview.md', title: 'Visión General', number: '00' },
-            { id: '01-setup', file: '01-setup.md', title: 'Configuración e Ingeniería de Contexto', number: '01' },
-            { id: '02-plan-and-scaffold', file: '02-plan-and-scaffold.md', title: 'Planificar y Estructurar', number: '02' },
-            { id: '03-agent-mode', file: '03-agent-mode.md', title: 'Construir el Juego', number: '03' },
-            { id: '04-design-vibes', file: '04-design-vibes.md', title: 'Temas Design-First', number: '04' },
-            { id: '05-polish', file: '05-polish.md', title: 'Pulido y Trabajo Paralelo', number: '05' },
-            { id: '06-bonus', file: '06-bonus.md', title: 'Bonus y Extensiones', number: '🎉' },
+            { id: '00-overview', file: '00-overview.md', title: 'Visión general', number: '00' },
+            { id: '01-setup', file: '01-setup.md', title: 'Configuración e ingeniería de contexto', number: '01' },
+            { id: '02-plan-and-scaffold', file: '02-plan-and-scaffold.md', title: 'Planificación y estructura inicial', number: '02' },
+            { id: '03-agent-mode', file: '03-agent-mode.md', title: 'Construir el juego', number: '03' },
+            { id: '04-design-vibes', file: '04-design-vibes.md', title: 'Tematización orientada al diseño', number: '04' },
+            { id: '05-polish', file: '05-polish.md', title: 'Pulido y trabajo paralelo', number: '05' },
+            { id: '06-bonus', file: '06-bonus.md', title: 'Extras y ampliaciones', number: '🎉' },
         ];
 
         const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
@@ -385,7 +385,7 @@
             buildSidebar();
             updateNavButtons();
             buildFooterNav();
-            document.title = `${step.title} - Mona Mayhem Workshop (${TRACKS[currentTrack].label})`;
+            document.title = `${step.title} - Taller de Mona Mayhem (${TRACKS[currentTrack].label})`;
 
             const contentEl = document.getElementById('markdownContent');
             contentEl.innerHTML = '<div class="loading">Cargando contenido</div>';
