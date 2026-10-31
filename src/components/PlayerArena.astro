@@ -1,0 +1,145 @@
+---
+import ContributionGrid from './ContributionGrid.astro';
+
+interface Props {
+	player: 'one' | 'two';
+	label: string;
+}
+
+const { player, label } = Astro.props;
+---
+
+<article class={`arena arena-${player}`}>
+	<header class="profile">
+		<div class="avatar" aria-hidden="true">P{player === 'one' ? '1' : '2'}</div>
+		<div>
+			<h2>{label}</h2>
+			<p data-username>Username will appear here</p>
+			<span class="class-badge" data-class-badge hidden></span>
+		</div>
+	</header>
+
+	<p class="total">Total contributions: <strong data-total>—</strong></p>
+	<ContributionGrid />
+	<p id={`player-${player}-error`} class="arena-error" data-player-error role="alert" hidden></p>
+
+	<dl class="stats">
+		<div><dt>Longest streak</dt><dd data-stat-longest>— days</dd></div>
+		<div><dt>Current streak</dt><dd data-stat-current>— days</dd></div>
+		<div><dt>Most active day</dt><dd data-stat-peak>—</dd></div>
+		<div><dt>Consistency</dt><dd data-stat-consistency>—</dd></div>
+	</dl>
+</article>
+
+<style>
+	.arena {
+		min-width: 0;
+		position: relative;
+		border: 1px solid rgb(0 240 255 / 60%);
+		background: linear-gradient(145deg, rgb(0 240 255 / 6%), rgb(7 10 20 / 95%) 34%);
+		padding: 1.1rem;
+		box-shadow: 0 0 18px rgb(0 240 255 / 11%), inset 0 0 24px rgb(0 240 255 / 3%);
+		clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 0 100%);
+	}
+
+	.arena-one {
+		--player-color: var(--cyan, #00f0ff);
+		border-color: rgb(0 240 255 / 68%);
+		box-shadow: 0 0 20px rgb(0 240 255 / 12%), inset 0 0 26px rgb(0 240 255 / 4%);
+	}
+
+	.arena-two {
+		--player-color: var(--magenta, #ff2bd6);
+		border-color: rgb(255 43 214 / 68%);
+		background: linear-gradient(145deg, rgb(255 43 214 / 6%), rgb(7 10 20 / 95%) 34%);
+		box-shadow: 0 0 20px rgb(255 43 214 / 12%), inset 0 0 26px rgb(255 43 214 / 4%);
+	}
+
+	.profile {
+		display: flex;
+		gap: 0.75rem;
+		align-items: center;
+	}
+
+	.avatar {
+		display: grid;
+		width: 3rem;
+		height: 3rem;
+		place-items: center;
+		border: 1px solid var(--player-color, var(--cyan, #00f0ff));
+		color: var(--player-color, var(--cyan, #00f0ff));
+		font-family: var(--display, 'Orbitron', sans-serif);
+		font-weight: 700;
+		text-shadow: 0 0 10px currentColor;
+		box-shadow: 0 0 12px color-mix(in srgb, currentColor 35%, transparent);
+	}
+
+	.arena h2 {
+		color: var(--player-color, var(--cyan, #00f0ff));
+		font-family: var(--display, 'Orbitron', sans-serif);
+		font-size: 1rem;
+		text-shadow: 0 0 12px color-mix(in srgb, currentColor 55%, transparent);
+		text-transform: uppercase;
+	}
+
+	.profile p {
+		margin: 0;
+		color: #8ea1ac;
+		font-family: var(--mono, 'Share Tech Mono', monospace);
+	}
+
+	.profile p {
+		margin-top: 0.25rem;
+	}
+
+	.class-badge {
+		display: inline-block;
+		margin-top: 0.45rem;
+		border: 1px solid color-mix(in srgb, var(--player-color) 65%, transparent);
+		color: var(--player-color);
+		font-family: var(--mono, 'Share Tech Mono', monospace);
+		font-size: 0.72rem;
+		letter-spacing: 0.08em;
+		padding: 0.2rem 0.45rem;
+		text-shadow: 0 0 8px color-mix(in srgb, currentColor 50%, transparent);
+		text-transform: uppercase;
+		box-shadow: 0 0 10px color-mix(in srgb, currentColor 15%, transparent);
+	}
+
+	.total {
+		color: #9fb3bd;
+		font-family: var(--mono, 'Share Tech Mono', monospace);
+	}
+
+	.total strong {
+		color: var(--player-color, var(--cyan, #00f0ff));
+		font-size: 1.15rem;
+		text-shadow: 0 0 10px color-mix(in srgb, currentColor 45%, transparent);
+	}
+
+	.arena-error {
+		margin: 0.75rem 0;
+		color: var(--yellow, #fcee0a);
+		font-family: var(--mono, 'Share Tech Mono', monospace);
+		text-shadow: 0 0 10px rgb(252 238 10 / 38%);
+	}
+
+	.stats {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.75rem;
+	}
+
+	.stats dt {
+		color: #93a2ac;
+		font-family: var(--mono, 'Share Tech Mono', monospace);
+		font-size: 0.85rem;
+	}
+
+	.stats dd {
+		margin: 0.25rem 0 0;
+		color: var(--player-color, var(--cyan, #00f0ff));
+		font-family: var(--mono, 'Share Tech Mono', monospace);
+		text-shadow: 0 0 9px color-mix(in srgb, currentColor 40%, transparent);
+	}
+</style>

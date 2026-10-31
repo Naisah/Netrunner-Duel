@@ -1,17 +1,215 @@
 ---
-
+import DuelForm from '../components/DuelForm.astro';
+import DuelScoreboard from '../components/DuelScoreboard.astro';
+import NeuralIntegrity from '../components/NeuralIntegrity.astro';
+import PlayerArena from '../components/PlayerArena.astro';
+import RequestStatus from '../components/RequestStatus.astro';
 ---
 
+<!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Mona Mayhem</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Share+Tech+Mono&display=swap"
+			rel="stylesheet"
+		/>
+		<title>Netrunner Duel</title>
 	</head>
 	<body>
-		<h1>Mona Mayhem</h1>
-		<p>Welcome to Mona Mayhem! Time to build a GitHub Contribution Battle Arena.</p>
+		<main class="page">
+			<NeuralIntegrity />
+			<header>
+				<button
+					type="button"
+					class="sound-toggle"
+					data-sound-toggle
+					aria-label="Turn sound effects off"
+					aria-pressed="true"
+				>
+					SFX: ON
+				</button>
+				<p>GITHUB CONTRIBUTION BATTLE ARENA</p>
+				<h1>Netrunner Duel</h1>
+			</header>
+
+			<section class="controls" aria-label="Choose players">
+				<DuelForm />
+				<RequestStatus />
+			</section>
+
+			<DuelScoreboard />
+
+			<section class="arenas" aria-label="Player arenas">
+				<PlayerArena player="one" label="Player 1" />
+				<PlayerArena player="two" label="Player 2" />
+			</section>
+		</main>
 	</body>
 </html>
+
+<script>
+	import '../scripts/contribution-battle';
+</script>
+
+<style is:global>
+	:root {
+		color-scheme: dark;
+		--void: #05060d;
+		--panel: rgb(9 12 24 / 92%);
+		--cyan: #00f0ff;
+		--magenta: #ff2bd6;
+		--yellow: #fcee0a;
+		--muted: #82909e;
+		--mono: 'Share Tech Mono', monospace;
+		--display: 'Orbitron', sans-serif;
+	}
+
+	* {
+		box-sizing: border-box;
+	}
+
+	html {
+		min-height: 100%;
+		background: var(--void);
+	}
+
+	body {
+		position: relative;
+		isolation: isolate;
+		min-height: 100vh;
+		margin: 0;
+		padding: 2rem;
+		overflow-x: hidden;
+		background:
+			linear-gradient(rgb(0 240 255 / 4%) 1px, transparent 1px),
+			linear-gradient(90deg, rgb(0 240 255 / 4%) 1px, transparent 1px),
+			radial-gradient(ellipse at 50% 35%, #101528 0%, var(--void) 72%);
+		background-size: 36px 36px, 36px 36px, cover;
+		color: #e7faff;
+		font-family: var(--mono);
+	}
+
+	body::before,
+	body::after {
+		position: fixed;
+		z-index: -1;
+		pointer-events: none;
+		content: '';
+		inset: 0;
+	}
+
+	body::before {
+		background: repeating-linear-gradient(
+			to bottom,
+			transparent 0,
+			rgb(0 0 0 / 0%) 2px,
+			rgb(0 0 0 / 22%) 3px,
+			transparent 4px
+		);
+		opacity: 0.38;
+	}
+
+	body::after {
+		background: radial-gradient(ellipse at center, transparent 42%, rgb(0 0 0 / 74%) 100%);
+	}
+
+	button,
+	input {
+		font: inherit;
+	}
+
+	button {
+		color: inherit;
+	}
+
+	.page {
+		position: relative;
+		width: min(100%, 1160px);
+		margin: 0 auto;
+	}
+
+	main.page > header {
+		position: relative;
+		margin-bottom: 2.2rem;
+		text-align: center;
+	}
+
+	.sound-toggle {
+		position: absolute;
+		top: 0;
+		right: 0;
+		border: 1px solid rgb(0 240 255 / 45%);
+		background: rgb(0 240 255 / 5%);
+		color: var(--cyan);
+		cursor: pointer;
+		font-family: var(--mono);
+		font-size: 0.8rem;
+		padding: 0.4rem 0.65rem;
+		text-shadow: 0 0 8px rgb(0 240 255 / 40%);
+	}
+
+	.sound-toggle:focus-visible {
+		outline: 2px solid var(--yellow);
+		outline-offset: 3px;
+	}
+
+	.sound-toggle[aria-pressed='false'] {
+		border-color: rgb(130 144 158 / 55%);
+		color: var(--muted);
+		text-shadow: none;
+	}
+
+	main.page > header p {
+		margin: 0 0 0.8rem;
+		color: var(--cyan);
+		font-size: 0.78rem;
+		letter-spacing: 0.28em;
+		text-shadow: 0 0 12px rgb(0 240 255 / 75%);
+	}
+
+	main.page > header h1 {
+		margin: 0;
+		color: #f5fbff;
+		font-family: var(--display);
+		font-size: clamp(2.1rem, 6vw, 4.5rem);
+		font-weight: 900;
+		letter-spacing: 0.08em;
+		text-shadow: 0 0 8px rgb(0 240 255 / 65%), 0 0 30px rgb(0 240 255 / 25%);
+		text-transform: uppercase;
+	}
+
+	.controls {
+		margin-bottom: 1.5rem;
+		padding: 1.25rem;
+		border: 1px solid rgb(0 240 255 / 48%);
+		background: linear-gradient(110deg, rgb(0 240 255 / 5%), var(--panel) 30%, rgb(255 43 214 / 5%));
+		box-shadow: 0 0 20px rgb(0 240 255 / 8%), inset 0 0 22px rgb(0 240 255 / 3%);
+		clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+	}
+
+	.arenas {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+		margin-top: 1.5rem;
+	}
+
+	@media (max-width: 700px) {
+		body {
+			padding: 1rem;
+		}
+
+		main.page > header {
+			padding-top: 2.8rem;
+		}
+
+		.arenas {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

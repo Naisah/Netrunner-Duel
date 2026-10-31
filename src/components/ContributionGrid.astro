@@ -1,0 +1,119 @@
+<section class="calendar" aria-label="52-week contribution calendar">
+	<h3>Contribution activity</h3>
+	<p class="date-range" data-date-range></p>
+	<div class="grid skeleton" data-grid-skeleton aria-hidden="true" hidden>
+		{
+			Array.from({ length: 52 }, () => (
+				<div class="week">
+					{Array.from({ length: 7 }, () => <span class="day" />)}
+				</div>
+			))
+		}
+	</div>
+	<div class="grid" data-grid hidden role="grid" aria-label="Contribution calendar"></div>
+</section>
+
+<style is:global>
+	.calendar {
+		margin: 1.25rem 0;
+		overflow-x: auto;
+	}
+
+	.calendar h3 {
+		color: var(--player-color, var(--cyan, #00f0ff));
+		font-family: var(--display, 'Orbitron', sans-serif);
+		font-size: 1rem;
+		text-shadow: 0 0 10px color-mix(in srgb, currentColor 45%, transparent);
+		text-transform: uppercase;
+	}
+
+	.calendar .date-range {
+		color: #8698a2;
+		font-family: var(--mono, 'Share Tech Mono', monospace);
+		min-height: 1.25rem;
+		font-size: 0.8rem;
+	}
+
+	.calendar .grid {
+		display: grid;
+		grid-auto-columns: 0.65rem;
+		grid-auto-flow: column;
+		gap: 0.22rem;
+		min-width: max-content;
+	}
+
+	.calendar .week {
+		display: grid;
+		gap: 0.22rem;
+		opacity: 0;
+		transform: translateY(5px);
+		animation: week-fill 320ms ease-out forwards;
+		animation-delay: calc(var(--column-index, 0) * 18ms);
+	}
+
+	.calendar .day {
+		display: block;
+		width: 0.65rem;
+		height: 0.65rem;
+		border-radius: 2px;
+	}
+
+	.calendar [data-level='0'] {
+		background: #141a25;
+		box-shadow: inset 0 0 0 1px rgb(132 157 173 / 17%);
+	}
+
+	.calendar [data-level='1'] {
+		background: color-mix(in srgb, var(--player-color, var(--cyan, #00f0ff)) 27%, #10131d);
+		box-shadow: 0 0 3px color-mix(in srgb, var(--player-color, var(--cyan, #00f0ff)) 35%, transparent);
+	}
+
+	.calendar [data-level='2'] {
+		background: color-mix(in srgb, var(--player-color, var(--cyan, #00f0ff)) 48%, #10131d);
+		box-shadow: 0 0 5px color-mix(in srgb, var(--player-color, var(--cyan, #00f0ff)) 55%, transparent);
+	}
+
+	.calendar [data-level='3'] {
+		background: color-mix(in srgb, var(--player-color, var(--cyan, #00f0ff)) 72%, #10131d);
+		box-shadow: 0 0 8px color-mix(in srgb, var(--player-color, var(--cyan, #00f0ff)) 72%, transparent);
+	}
+
+	.calendar [data-level='4'] {
+		background: var(--player-color, var(--cyan, #00f0ff));
+		box-shadow: 0 0 6px var(--player-color, var(--cyan, #00f0ff)), 0 0 15px color-mix(in srgb, var(--player-color, var(--cyan, #00f0ff)) 74%, transparent);
+	}
+
+	.calendar .skeleton .day {
+		background: color-mix(in srgb, var(--player-color, var(--cyan, #00f0ff)) 24%, #10131d);
+		animation: pulse 1s ease-in-out infinite alternate;
+	}
+
+	@keyframes pulse {
+		from { opacity: 0.4; }
+		to { opacity: 1; }
+	}
+
+	@keyframes week-fill {
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.calendar .skeleton .day {
+			animation: none;
+			opacity: 0.6;
+		}
+
+		.calendar .week {
+			animation: none;
+			opacity: 1;
+			transform: none;
+		}
+	}
+
+	.calendar [hidden] {
+		display: none;
+	}
+</style>

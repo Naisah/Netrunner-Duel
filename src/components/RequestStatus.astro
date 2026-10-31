@@ -1,0 +1,85 @@
+<p id="duel-status" class="request-status" data-status data-state="idle" role="status" aria-live="polite">
+	&gt; AWAITING NETRUNNERS...<span class="cursor" aria-hidden="true">_</span>
+</p>
+<section class="boot-screen" data-boot-screen aria-label="GitHub grid connection terminal" hidden>
+	<p class="terminal-heading">NETRUNNER // SECURE SHELL</p>
+	<div data-boot-output role="log" aria-live="polite"></div>
+</section>
+
+<style>
+	.request-status {
+		color: var(--cyan, #00f0ff);
+		font-family: var(--mono, 'Share Tech Mono', monospace);
+		letter-spacing: 0.06em;
+		min-height: 1.5rem;
+		margin: 1rem 0;
+		text-align: center;
+		text-shadow: 0 0 10px rgb(0 240 255 / 55%);
+	}
+
+	.request-status[data-state='idle'] .cursor {
+		animation: blink 850ms steps(2, start) infinite;
+	}
+
+	.request-status[data-state='loading'] {
+		color: var(--yellow, #fcee0a);
+		text-shadow: 0 0 10px rgb(252 238 10 / 55%);
+	}
+
+	.request-status[data-state='error'] {
+		color: var(--yellow, #fcee0a);
+		text-shadow: 0 0 10px rgb(252 238 10 / 45%);
+	}
+
+	.request-status[data-state='success'] {
+		color: var(--cyan, #00f0ff);
+	}
+
+	.boot-screen {
+		margin: 1rem auto;
+		padding: 0.9rem 1rem;
+		border: 1px solid rgb(0 240 255 / 35%);
+		background: #03050a;
+		color: var(--cyan, #00f0ff);
+		font-family: var(--mono, 'Share Tech Mono', monospace);
+		text-align: left;
+		text-shadow: 0 0 9px rgb(0 240 255 / 45%);
+		box-shadow: inset 0 0 20px rgb(0 240 255 / 5%);
+	}
+
+	.terminal-heading {
+		margin: 0 0 0.55rem;
+		color: var(--yellow, #fcee0a);
+		font-size: 0.72rem;
+		letter-spacing: 0.12em;
+	}
+
+	.boot-line {
+		min-height: 1.3em;
+		margin: 0.25rem 0;
+	}
+
+	.boot-line[data-state='error'] {
+		color: var(--yellow, #fcee0a);
+	}
+
+	.boot-cursor {
+		animation: blink 850ms steps(2, start) infinite;
+	}
+
+	[hidden] {
+		display: none !important;
+	}
+
+	@keyframes blink {
+		to {
+			visibility: hidden;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.request-status[data-state='idle'] .cursor {
+			animation: none;
+		}
+	}
+</style>

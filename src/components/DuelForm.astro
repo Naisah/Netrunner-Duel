@@ -1,0 +1,133 @@
+<form class="duel-form" data-duel-form aria-label="Choose duel players" novalidate>
+	<label for="player-one-username">
+		<span>Player 1</span>
+		<input id="player-one-username" name="playerOne" type="text" placeholder="GitHub username" autocomplete="off" aria-describedby="duel-status player-one-error" required />
+	</label>
+	<span class="versus" aria-hidden="true">VS</span>
+	<label for="player-two-username">
+		<span>Player 2</span>
+		<input id="player-two-username" name="playerTwo" type="text" placeholder="GitHub username" autocomplete="off" aria-describedby="duel-status player-two-error" required />
+	</label>
+	<button type="submit" data-submit>JACK IN</button>
+</form>
+
+<div class="matchups" aria-label="Quick-select matchups">
+	<span>QUICK JACK-IN</span>
+	<button type="button" data-matchup="torvalds,gaearon">torvalds vs. gaearon</button>
+	<button type="button" data-matchup="octocat,sindresorhus">octocat vs. sindresorhus</button>
+</div>
+
+<style>
+	.duel-form {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+		align-items: end;
+		justify-content: center;
+	}
+
+	label {
+		display: grid;
+		gap: 0.4rem;
+		color: #d7faff;
+		font-family: var(--mono, 'Share Tech Mono', monospace);
+		font-size: 0.88rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	input {
+		min-width: 220px;
+		border: 1px solid rgb(0 240 255 / 45%);
+		outline: 0;
+		background: #050811;
+		color: #edfdff;
+		padding: 0.72rem 0.85rem;
+		box-shadow: inset 0 0 12px rgb(0 240 255 / 5%);
+	}
+
+	input:focus {
+		border-color: var(--cyan, #00f0ff);
+		box-shadow: 0 0 12px rgb(0 240 255 / 32%);
+	}
+
+	input:focus-visible,
+	button:focus-visible {
+		outline: 2px solid var(--yellow, #fcee0a);
+		outline-offset: 3px;
+	}
+
+	input::placeholder {
+		color: #53636e;
+	}
+
+	.duel-form > button {
+		border: 1px solid var(--yellow, #fcee0a);
+		background: rgb(252 238 10 / 9%);
+		color: var(--yellow, #fcee0a);
+		cursor: pointer;
+		font-family: var(--display, 'Orbitron', sans-serif);
+		font-size: 0.78rem;
+		font-weight: 800;
+		letter-spacing: 0.12em;
+		padding: 0.8rem 1.2rem;
+		text-shadow: 0 0 10px rgb(252 238 10 / 60%);
+		box-shadow: 0 0 14px rgb(252 238 10 / 12%);
+		clip-path: polygon(0 0, 100% 0, 100% calc(100% - 9px), calc(100% - 9px) 100%, 0 100%);
+	}
+
+	.duel-form > button:hover,
+	.matchups button:hover {
+		background: rgb(252 238 10 / 19%);
+		box-shadow: 0 0 18px rgb(252 238 10 / 28%);
+	}
+
+	.matchups {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.6rem;
+		align-items: center;
+		justify-content: center;
+		margin-top: 1rem;
+		font-family: var(--mono, 'Share Tech Mono', monospace);
+	}
+
+	.matchups span {
+		color: var(--yellow, #fcee0a);
+		font-size: 0.75rem;
+		letter-spacing: 0.12em;
+	}
+
+	.matchups button {
+		border: 1px solid rgb(0 240 255 / 36%);
+		background: rgb(0 240 255 / 5%);
+		color: var(--cyan, #00f0ff);
+		cursor: pointer;
+		font-size: 0.78rem;
+		padding: 0.45rem 0.7rem;
+		text-shadow: 0 0 8px rgb(0 240 255 / 40%);
+		clip-path: polygon(0 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%);
+	}
+
+	.versus {
+		padding-bottom: 0.7rem;
+		color: var(--yellow, #fcee0a);
+		font-family: var(--display, 'Orbitron', sans-serif);
+	}
+
+	@media (max-width: 600px) {
+		.duel-form {
+			align-items: stretch;
+			flex-direction: column;
+		}
+
+		.versus {
+			display: none;
+		}
+
+		input {
+			min-width: 0;
+			width: 100%;
+		}
+	}
+</style>

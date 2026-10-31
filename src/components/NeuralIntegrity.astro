@@ -1,0 +1,93 @@
+<section class="integrity" aria-label="Neural integrity">
+	<h2>NEURAL INTEGRITY</h2>
+	<div class="integrity-player integrity-one">
+		<div class="integrity-label"><span>PLAYER 1</span><strong data-integrity-score="one">0%</strong></div>
+		<div class="integrity-track" role="progressbar" aria-label="Player 1 neural integrity" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+			<span data-integrity-fill="one"></span>
+		</div>
+	</div>
+	<div class="integrity-player integrity-two">
+		<div class="integrity-label"><span>PLAYER 2</span><strong data-integrity-score="two">0%</strong></div>
+		<div class="integrity-track" role="progressbar" aria-label="Player 2 neural integrity" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+			<span data-integrity-fill="two"></span>
+		</div>
+	</div>
+</section>
+
+<style>
+	.integrity {
+		display: grid;
+		grid-template-columns: auto repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+		align-items: end;
+		margin: 0 0 1.5rem;
+		padding: 0.8rem 1rem;
+		border: 1px solid rgb(0 240 255 / 28%);
+		background: rgb(5 8 17 / 88%);
+		font-family: var(--mono, 'Share Tech Mono', monospace);
+	}
+
+	.integrity h2 {
+		margin: 0;
+		color: var(--yellow, #fcee0a);
+		font-family: var(--display, 'Orbitron', sans-serif);
+		font-size: 0.75rem;
+		letter-spacing: 0.08em;
+	}
+
+	.integrity-player {
+		min-width: 0;
+	}
+
+	.integrity-label {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 0.35rem;
+		color: #a9bac5;
+		font-size: 0.75rem;
+	}
+
+	.integrity-label strong {
+		color: var(--player-color);
+	}
+
+	.integrity-one {
+		--player-color: var(--cyan, #00f0ff);
+	}
+
+	.integrity-two {
+		--player-color: var(--magenta, #ff2bd6);
+	}
+
+	.integrity-track {
+		height: 8px;
+		overflow: hidden;
+		border: 1px solid color-mix(in srgb, var(--player-color) 45%, transparent);
+		background: #10131d;
+	}
+
+	.integrity-track > span {
+		display: block;
+		width: 0;
+		height: 100%;
+		background: var(--player-color);
+		box-shadow: 0 0 10px var(--player-color), 0 0 18px var(--player-color);
+		transition: width 420ms ease-out;
+	}
+
+	@media (max-width: 700px) {
+		.integrity {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		.integrity h2 {
+			grid-column: 1 / -1;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.integrity-track > span {
+			transition: none;
+		}
+	}
+</style>

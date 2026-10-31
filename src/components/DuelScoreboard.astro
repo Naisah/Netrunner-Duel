@@ -1,0 +1,254 @@
+<section class="scoreboard" data-scoreboard aria-label="Duel scoreboard" hidden>
+	<p>DUEL RESULT</p>
+	<h2 data-result role="status" aria-live="polite" aria-atomic="true"></h2>
+	<p class="overall-score">
+		<span data-score-one>0</span>
+		<span aria-hidden="true">:</span>
+		<span data-score-two>0</span>
+	</p>
+	<table>
+		<thead>
+			<tr>
+				<th scope="col">CATEGORY</th>
+				<th scope="col" data-player-one-heading>PLAYER 1</th>
+				<th scope="col" data-player-two-heading>PLAYER 2</th>
+				<th scope="col">WEIGHT</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr data-stat-row="total">
+				<th scope="row">Total contributions</th>
+				<td data-comparison-one="total"></td>
+				<td data-comparison-two="total"></td>
+				<td>35%</td>
+			</tr>
+			<tr data-stat-row="longest">
+				<th scope="row">Longest streak</th>
+				<td data-comparison-one="longest"></td>
+				<td data-comparison-two="longest"></td>
+				<td>20%</td>
+			</tr>
+			<tr data-stat-row="current">
+				<th scope="row">Current streak</th>
+				<td data-comparison-one="current"></td>
+				<td data-comparison-two="current"></td>
+				<td>15%</td>
+			</tr>
+			<tr data-stat-row="peak">
+				<th scope="row">Peak day</th>
+				<td data-comparison-one="peak"></td>
+				<td data-comparison-two="peak"></td>
+				<td>15%</td>
+			</tr>
+			<tr data-stat-row="consistency">
+				<th scope="row">Consistency</th>
+				<td data-comparison-one="consistency"></td>
+				<td data-comparison-two="consistency"></td>
+				<td>15%</td>
+			</tr>
+		</tbody>
+	</table>
+	<section class="system-log" data-system-log aria-label="System log" hidden>
+		<h3>SYSTEM LOG</h3>
+		<div data-system-log-output role="log" aria-live="polite" aria-relevant="additions"></div>
+	</section>
+</section>
+
+<style>
+	.scoreboard {
+		border: 1px solid rgb(252 238 10 / 60%);
+		background: linear-gradient(120deg, rgb(252 238 10 / 5%), rgb(8 10 18 / 95%));
+		margin-top: 1rem;
+		padding: 1rem;
+		text-align: center;
+		box-shadow: 0 0 22px rgb(252 238 10 / 8%);
+		clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+	}
+
+	.scoreboard > p:first-child {
+		margin: 0 0 0.5rem;
+		color: var(--yellow, #fcee0a);
+		font-family: var(--mono, 'Share Tech Mono', monospace);
+		font-size: 0.75rem;
+		letter-spacing: 0.1em;
+		text-shadow: 0 0 10px rgb(252 238 10 / 50%);
+	}
+
+	.scoreboard h2 {
+		color: var(--yellow, #fcee0a);
+		font-family: var(--display, 'Orbitron', sans-serif);
+		font-size: clamp(1rem, 3vw, 1.6rem);
+		text-shadow: 0 0 14px rgb(252 238 10 / 60%);
+	}
+
+	.overall-score {
+		display: flex;
+		gap: 0.75rem;
+		justify-content: center;
+		margin: 0.6rem 0 1rem;
+		color: #e9faff;
+		font-family: var(--display, 'Orbitron', sans-serif);
+		font-size: 1.25rem;
+		text-shadow: 0 0 10px rgb(0 240 255 / 35%);
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		text-align: left;
+	}
+
+	th,
+	td {
+		border-top: 1px solid rgb(0 240 255 / 18%);
+		color: #b7c8d0;
+		font-family: var(--mono, 'Share Tech Mono', monospace);
+		padding: 0.55rem;
+	}
+
+	thead th {
+		color: var(--cyan, #00f0ff);
+		font-family: var(--display, 'Orbitron', sans-serif);
+		font-size: 0.75rem;
+	}
+
+	[data-stat-row] [data-winner='true'] {
+		background: rgb(252 238 10 / 12%);
+		color: var(--yellow, #fcee0a);
+		font-weight: 700;
+		text-shadow: 0 0 10px rgb(252 238 10 / 50%);
+	}
+
+	[data-stat-row][data-revealed='false'] {
+		visibility: collapse;
+		opacity: 0;
+		transform: translateY(5px);
+	}
+
+	[data-stat-row][data-revealed='true'] {
+		opacity: 1;
+		transform: translateY(0);
+		transition: opacity 220ms ease, transform 220ms ease;
+	}
+
+	[data-stat-row][data-tied='true'] td {
+		background: rgb(255 255 255 / 4%);
+	}
+
+	.system-log {
+		margin-top: 1rem;
+		border: 1px solid rgb(0 240 255 / 35%);
+		background: rgb(0 240 255 / 3%);
+		padding: 0.75rem 1rem;
+		text-align: left;
+		box-shadow: inset 0 0 16px rgb(0 240 255 / 3%);
+	}
+
+	.system-log h3 {
+		margin: 0 0 0.5rem;
+		color: var(--cyan, #00f0ff);
+		font-family: var(--display, 'Orbitron', sans-serif);
+		font-size: 0.78rem;
+		letter-spacing: 0.12em;
+		text-shadow: 0 0 9px rgb(0 240 255 / 45%);
+	}
+
+	.system-log [data-system-log-output] {
+		display: grid;
+		gap: 0.3rem;
+		color: #a9c5ce;
+		font-family: var(--mono, 'Share Tech Mono', monospace);
+		font-size: 0.85rem;
+	}
+
+	.system-log-line {
+		margin: 0;
+		overflow-wrap: anywhere;
+	}
+
+	.system-log-line:last-child {
+		color: var(--yellow, #fcee0a);
+		text-shadow: 0 0 8px rgb(252 238 10 / 35%);
+	}
+
+	.scoreboard h2[data-glitch='true'] {
+		position: relative;
+		animation: banner-glitch 420ms steps(2, end);
+	}
+
+	.scoreboard h2[data-glitch='true']::before,
+	.scoreboard h2[data-glitch='true']::after {
+		position: absolute;
+		inset: 0;
+		overflow: hidden;
+		pointer-events: none;
+		content: attr(data-text);
+	}
+
+	.scoreboard h2[data-glitch='true']::before {
+		color: var(--cyan, #00f0ff);
+		text-shadow: -2px 0 var(--cyan, #00f0ff);
+		clip-path: inset(0 0 48% 0);
+		transform: translateX(-2px);
+		animation: rgb-split 360ms steps(2, end);
+	}
+
+	.scoreboard h2[data-glitch='true']::after {
+		color: var(--magenta, #ff2bd6);
+		text-shadow: 2px 0 var(--magenta, #ff2bd6);
+		clip-path: inset(53% 0 0 0);
+		transform: translateX(2px);
+		animation: rgb-split 360ms steps(2, end) reverse;
+	}
+
+	:global(body.duel-jitter) {
+		animation: screen-jitter 80ms steps(2, end) 4;
+	}
+
+	@keyframes banner-glitch {
+		0% { transform: translate(0); }
+		20% { transform: translate(-2px, 1px) skewX(2deg); }
+		45% { transform: translate(2px, -1px); }
+		70% { transform: translate(-1px, 0) skewX(-1deg); }
+		100% { transform: translate(0); }
+	}
+
+	@keyframes rgb-split {
+		0%, 100% { opacity: 0; }
+		20%, 75% { opacity: 0.9; }
+	}
+
+	@keyframes screen-jitter {
+		0% { transform: translate(0); }
+		25% { transform: translate(2px, -1px); }
+		50% { transform: translate(-2px, 1px); }
+		75% { transform: translate(1px, 1px); }
+	}
+
+	[hidden] {
+		display: none;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		[data-stat-row][data-revealed='true'],
+		.scoreboard h2[data-glitch='true'],
+		:global(body.duel-jitter) {
+			animation: none;
+			transition: none;
+			transform: none;
+		}
+
+		.scoreboard h2[data-glitch='true']::before,
+		.scoreboard h2[data-glitch='true']::after {
+			display: none;
+		}
+	}
+
+	@media (max-width: 600px) {
+		th,
+		td {
+			padding: 0.4rem 0.25rem;
+			font-size: 0.78rem;
+		}
+	}
+</style>
