@@ -1,6 +1,6 @@
 🌐 English | [Español](README.es.md) | [Português (Brasil)](README.pt_BR.md) | [한국어](README.ko.md)
 
-# 🎮 Mona Mayhem
+# 🎮 Netrunner Duel
 
 **VS Code & GitHub Copilot CLI Workshop** — Build a GitHub Contribution Battle Arena
 
