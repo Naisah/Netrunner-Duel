@@ -4,14 +4,11 @@
 
 **VS Code & GitHub Copilot CLI Workshop** — Build a GitHub Contribution Battle Arena
 
-A workshop template for building a retro arcade-themed website with Astro that compares GitHub contribution graphs of two users. This is the **starting point** — you'll build the app step by step using GitHub Copilot.
+a retro arcade-themed website with Astro that compares GitHub contribution graphs of two users. This is the **starting point** — you'll build the app step by step using GitHub Copilot.
 
 ![Mona Mayhem Screenshot](docs/screenshot.png)
-*What you'll build by the end of the workshop*
 
-## 📚 Workshop
 
-The workshop supports two tracks — follow the one that matches your preferred workflow:
 
 - **VS Code track** — Chat, Plan Mode, Agent Mode, background agents, and editor-native review loops
 - **CLI track** — `copilot`, `@file` context, `/plan`, autonomous edits, `/fleet`, `/delegate`, and `/review`
